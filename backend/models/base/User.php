@@ -20,6 +20,8 @@ use yii\behaviors\TimestampBehavior;
  * @property string $verification_token
  * @property integer $created_at
  * @property integer $updated_at
+ *
+ * @property \backend\models\Restaurant[] $restaurants
  * @property string $aliasModel
  */
 abstract class User extends \yii\db\ActiveRecord
@@ -81,4 +83,16 @@ abstract class User extends \yii\db\ActiveRecord
             'verification_token' => 'Verification Token',
         ];
     }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getRestaurants()
+    {
+        return $this->hasMany(\backend\models\Restaurant::className(), ['user_id' => 'id']);
+    }
+
+
+
+
 }

@@ -73,7 +73,7 @@ class SaleSearch extends Sale
         return $dataProvider;
     }
 
-        /**
+    /**
      * Creates data provider instance with search query applied
      *
      * @param array $params
@@ -82,6 +82,9 @@ class SaleSearch extends Sale
      */
     public function benifit($params)
     {
+
+        $fromDate = date('Y-m-d', strtotime(\Yii::$app->request->get('searchFDate')));
+        $toDate = date('Y-m-d', strtotime(\Yii::$app->request->get('searchTDate')));
 
         $query = Sale::find();
 
@@ -111,7 +114,7 @@ class SaleSearch extends Sale
             'bill_no' => $this->bill_no,
         ]);
 
-        $query->andFilterWhere(['like', 'date', $this->date]);
+        $query->andFilterWhere(['like', 'date', $fromDate]);
         return $dataProvider;
     }
 }

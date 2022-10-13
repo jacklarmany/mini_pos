@@ -141,7 +141,7 @@ $this->params['breadcrumbs'][] = $this->title;
             </tbody>
         </table>
     </div>
-    <?php GridView::widget([
+    <?php echo GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'tableOptions' => ['class' => 'shadow-sm bg-white table-bordered table-hover', 'style' => 'width:100%'],

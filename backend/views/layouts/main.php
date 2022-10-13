@@ -15,19 +15,22 @@ $(document).ready(function(){
         window.location="index.php?r=product/backup";
     });
     $("#index").click(function(){
-        window.location="index.php?r=site/index";
+        window.location="index.php?r=site/";
     });
     $("#manage-website").click(function(){
         window.location="index.php?r=site/manage-website";
     });
     $("#trashbin").click(function(){
-        window.location="index.php?r=trash-bin/index";
+        window.location="index.php?r=trash-bin/";
     });
     $("#tables").click(function(){
-        window.location="index.php?r=tables/index";
+        window.location="index.php?r=tables/";
     });
     $("#users").click(function(){
-        window.location="index.php?r=user/index";
+        window.location="index.php?r=user/";
+    }); 
+    $("#restaurant").click(function(){
+        window.location="index.php?r=restaurant/";
     }); 
     $("#crefresh").click(function(){
         document.location.reload();
@@ -143,8 +146,9 @@ $this->title = Yii::t('app', 'Mini RT');
                     </div>
                     <hr class="p-0 m-0">
                     <div class="btn-group rounded btn-block">
-                        <button title="<?= Yii::t('app', 'Info') ?>" id="info" type="button" class="btn btn-sm btn-block text-left">
-                            <img width="26" src="<?= Yii::$app->request->baseUrl ?>/icons/info-25.png">เเเเเเเเเเเเเดเด้ด้ด้ด้ด
+                        <button title="<?= Yii::t('app', 'Info') ?>" id="restaurant" type="button" class="btn btn-sm btn-block text-left">
+                            <img width="26" src="<?= Yii::$app->request->baseUrl ?>/icons/info-25.png">
+                            <?= Yii::t('app', 'Restaurant info') ?>
                         </button>
                     </div>
                     <hr class="p-0 m-0">
