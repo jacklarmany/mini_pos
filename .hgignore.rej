@@ -1,0 +1,7 @@
+--- .hgignore	
++++ .hgignore	
+@@ -1,2 +1,4 @@
+ syntax: glob
+-backend/runtime/+.idea/
++backend/runtime/
++backend/web/assets/

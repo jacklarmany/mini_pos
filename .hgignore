@@ -1,0 +1,17 @@
+syntax: glob
+backend/runtime/
+composer.lock
+.idea\ipd_database_repo.iml
+.idea\php.xml
+.idea\vcs.xml
+.idea\workspace.xml
+common\config\main-local.php
+Frist draff_add_table_inside.xlsx
+~$Frist draff_add_table_inside.xlsx
+ipd_database_db.wb.mwb.bak
+ipd_database_db_final.wb.mwb
+backend/web/assets/
+.idea/
+backend/web/_backup/
+console/_backup/
+backend/web/files/

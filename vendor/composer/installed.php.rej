@@ -1,0 +1,12 @@
+--- vendor/composer/installed.php	
++++ vendor/composer/installed.php	
+@@ -1,7 +1,7 @@
+ <?php return array(
+     'root' => array(
+-        'pretty_version' => 'dev-default',
+-        'version' => 'dev-default',
++        'pretty_version' => '2.0.43',
++        'version' => '2.0.43.0',
+         'type' => 'project',
+         'install_path' => __DIR__ . '/../../',
+         'aliases' => array(),

@@ -1,0 +1,7 @@
+suite_namespace: backend\tests\functional
+actor: FunctionalTester
+modules:
+  enabled:
+    - Yii2:
+      entryScript: index-test.php
+      cleanup: false # don't wrap test in transaction
