@@ -188,12 +188,20 @@ class MenuController extends Controller
                                 echo Yii::$app->session->setFlash('error', '<i fa-exclamation-circle"> </i>' . 'ຈໍານວນຂາຍຕ້ອງຫຼາຍກວ່າ 0 ຂື້ນໄປ');
                                 return $this->redirect(['sale-product']);
                             } else {
-                                $menuModel->qty = $menuModel->qty + 1;
-                                $menuModel->save();
-                                $prepareMenu->qty = $prepareMenu->qty - 1;
-                                $prepareMenu->amount = $prepareMenu->qty * $menuModel->prices;
-                                $prepareMenu->checkbill = "No";
-                                $prepareMenu->save();
+                                echo "ddd";
+                                if ($menuModel->categories_id == 1) {
+                                    $menuModel->qty = $menuModel->qty + 1;
+                                    $menuModel->save();
+                                    $prepareMenu->qty = $prepareMenu->qty - 1;
+                                    $prepareMenu->amount = $prepareMenu->qty * $menuModel->prices;
+                                    $prepareMenu->checkbill = "No";
+                                    $prepareMenu->save();
+                                } else {
+                                    $prepareMenu->qty = $prepareMenu->qty - 1;
+                                    $prepareMenu->amount = $prepareMenu->qty * $menuModel->prices;
+                                    $prepareMenu->checkbill = "No";
+                                    $prepareMenu->save();
+                                }
                             }
                         }
                     }
