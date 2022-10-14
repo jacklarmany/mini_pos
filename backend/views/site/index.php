@@ -13,7 +13,7 @@
                         <!-- <i class="fa fa-3x fa-bottle-water"></i> -->
                         <p><img src="<?= \Yii::$app->request->baseUrl ?>/icons/dashboard/category-96.png" alt="" width="60"></p>
                         <div class=" mt-2" style="font-family: saysettha ot; font-weight:bold">
-                            <h5><?= Yii::t('app', 'Categories') ?></h5>
+                            <h6><?= Yii::t('app', 'Categories') ?></h6>
                         </div>
                     </div>
                 </a>
@@ -26,7 +26,7 @@
                         <!-- <i class="fa-3x fa fa-jug-detergent"></i> -->
                         <p><img src="<?= \Yii::$app->request->baseUrl ?>/icons/dashboard/menu-96.png" alt="" width="60"></p>
                         <div class=" mt-2" style="font-family: saysettha ot; font-weight:bold">
-                            <h5><?= Yii::t('app', 'Menu') ?></h5>
+                            <h6><?= Yii::t('app', 'Menu') ?></h6>
                         </div>
                     </div>
                 </a>
@@ -39,7 +39,7 @@
                         <!-- <i class="fa fa-shopping-cart text-danger fa-3x"></i> -->
                         <p><img src="<?= \Yii::$app->request->baseUrl ?>/icons/dashboard/sale-96.png" alt="" width="60"></p>
                         <div class=" mt-2" style="font-family: saysettha ot; font-weight:bold">
-                            <h5><?= Yii::t('app', 'Sale') ?></h5>
+                            <h6><?= Yii::t('app', 'Sale') ?></h6>
                         </div>
                     </div>
                 </a>
@@ -54,7 +54,7 @@
                         <!-- <i class="fa fa-people-roof fa-3x"></i> -->
                         <p><img src="<?= \Yii::$app->request->baseUrl ?>/icons/dashboard/bill-96.png" alt="" width="60"></p>
                         <div class=" mt-2" style="font-family: saysettha ot; font-weight:bold">
-                            <h5><?= Yii::t('app', 'Bills') ?></h5>
+                            <h6><?= Yii::t('app', 'Bills') ?></h6>
                         </div>
                     </div>
                 </a>
@@ -67,7 +67,7 @@
                         <!-- <i class="fa-solid fa fa-users-line fa-3x"></i> -->
                         <p><img src="<?= \Yii::$app->request->baseUrl ?>/icons/dashboard/purchase-96.png" alt="" width="60"></p>
                         <div class=" mt-2" style="font-family: saysettha ot; font-weight:bold">
-                            <h5><?= Yii::t('app', 'Purchase') ?></h5>
+                            <h6><?= Yii::t('app', 'Purchase') ?></h6>
                         </div>
                     </div>
                 </a>
@@ -81,7 +81,7 @@
                         <!-- <i class="fa fa-money fa-3x"></i> -->
                         <p><img src="<?= \Yii::$app->request->baseUrl ?>/icons/dashboard/benefit-96.png" alt="" width="60"></p>
                         <div class=" mt-2" style="font-family: saysettha ot; font-weight:bold">
-                            <h5><?= Yii::t('app', 'Benitfit') ?></h5>
+                            <h6><?= Yii::t('app', 'Benitfit') ?></h6>
                         </div>
                     </div>
                 </a>

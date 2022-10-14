@@ -180,7 +180,7 @@ $this->title = Yii::t('app', 'Mini RT');
     </header>
     <div class="content" id="content">
         <div class="row">
-            <div class="col-md-6 mt-1">
+            <div class="col-md-6">
                 <?php echo Breadcrumbs::widget(['links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : []]) ?>
             </div>
             <div class="col-md-6 text-right pt-1 pr-1">
@@ -208,7 +208,9 @@ $this->title = Yii::t('app', 'Mini RT');
                         <img src="<?= Yii::$app->request->baseUrl ?>/icons/user-25.png">
                     </button>
                     <div class="dropdown-menu dropdown-menu-right border-0 shadow rounded">
-                        <a class="dropdown-item" href="index.php?r=user/profile&id=<?= Yii::$app->user->id ?>"><img src="<?= Yii::$app->request->baseUrl ?>/icons/edit-user-24.png"> <?= Yii::t('app', 'Profile') ?></a>
+                        <a class="dropdown-item btn btn-sm shadow rounded m-2" href="index.php?r=user/profile&id=<?= Yii::$app->user->id ?>">
+                            <img src="<?= Yii::$app->request->baseUrl ?>/icons/edit-user-24.png"> <?= Yii::$app->user->identity->username ? Yii::$app->user->identity->username : ""; ?>
+                        </a>
                         <?=
                         Html::a('<img src="' . Yii::$app->request->baseUrl . '/icons/logout-24.png">' . Yii::t('app', 'Signout'), ['site/logout'], [
                             'class' => 'dropdown-item',
