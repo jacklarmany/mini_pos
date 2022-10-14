@@ -62,7 +62,7 @@ class MenuController extends Controller
     {
         $searchModel = new MenuSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
-        $dataProvider->pagination->pageSize=7;
+        $dataProvider->pagination->pageSize = 7;
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -181,13 +181,15 @@ class MenuController extends Controller
             if (Yii::$app->request->get('minus')) {
                 $menuModel = \backend\models\Menu::find()->where(['id' => $menu_id])->one();
                 if (is_object($menuModel)) {
-
                     $prepareMenu = \backend\models\PrepareMenu::find()->where(['menu_id' => $id, 'table_id' => $table_id])->one();
                     if (is_object($prepareMenu)) {
                         if ($prepareMenu->menu_id == $id) {
                             if ($prepareMenu->qty <= 1) {
-                                echo Yii::$app->session->setFlash('error', '<i fa-exclamation-circle"> </i>' . 'ບໍ່ອະນຸຍາດ');
+                                echo Yii::$app->session->setFlash('error', '<i fa-exclamation-circle"> </i>' . 'ຈໍານວນຂາຍຕ້ອງຫຼາຍກວ່າ 0 ຂື້ນໄປ');
+                                return $this->redirect(['sale-product']);
                             } else {
+                                $menuModel->qty = $menuModel->qty + 1;
+                                $menuModel->save();
                                 $prepareMenu->qty = $prepareMenu->qty - 1;
                                 $prepareMenu->amount = $prepareMenu->qty * $menuModel->prices;
                                 $prepareMenu->checkbill = "No";
@@ -199,24 +201,51 @@ class MenuController extends Controller
             } elseif (Yii::$app->request->get('plus')) {
                 $menuModel = \backend\models\Menu::find()->where(['id' => $menu_id])->one();
                 if (is_object($menuModel)) {
-
                     $prepareMenu = \backend\models\PrepareMenu::find()->where(['menu_id' => $id, 'table_id' => $table_id])->one();
                     if (is_object($prepareMenu)) {
                         if ($prepareMenu->menu_id == $id) {
-                            $prepareMenu->qty = $prepareMenu->qty + 1;
-                            $prepareMenu->amount = $prepareMenu->qty * $menuModel->prices;
+                            /// update menu qty 
+                            if ($menuModel->categories_id == 1) {
+                                if ($menuModel->qty < 1) {
+                                    echo Yii::$app->session->setFlash('error', '<i class="fa fa-exclamation-circle"> </i> ' . 'ຈໍານວນບໍ່ພຽງພໍ');
+                                    return $this->redirect(['sale-product']);
+                                } else {
+                                    $menuModel->qty = $menuModel->qty - 1;
+                                    $menuModel->save();
+                                    $prepareMenu->qty = $prepareMenu->qty + 1;
+                                    $prepareMenu->amount = $prepareMenu->qty * $menuModel->prices;
+                                    $prepareMenu->checkbill = "No";
+                                    $prepareMenu->save();
+                                }
+                            } else {
+                                $prepareMenu->qty = $prepareMenu->qty + 1;
+                                $prepareMenu->amount = $prepareMenu->qty * $menuModel->prices;
+                                $prepareMenu->checkbill = "No";
+                                $prepareMenu->save();
+                            }
+                        }
+                    } else {
+                        if ($menuModel->categories_id == 1) {
+                            $menuModel->qty = $menuModel->qty - 1;
+                            $menuModel->save();
+                            $prepareMenu = new PrepareMenu();
+                            $prepareMenu->table_id = $table_id;
+                            $prepareMenu->menu_id = $menuModel->id;
+                            $prepareMenu->qty = 1;
+                            $prepareMenu->price = $menuModel->prices;
+                            $prepareMenu->amount = $menuModel->prices * $prepareMenu->qty;
+                            $prepareMenu->checkbill = "No";
+                            $prepareMenu->save();
+                        } else {
+                            $prepareMenu = new PrepareMenu();
+                            $prepareMenu->table_id = $table_id;
+                            $prepareMenu->menu_id = $menuModel->id;
+                            $prepareMenu->qty = 1;
+                            $prepareMenu->price = $menuModel->prices;
+                            $prepareMenu->amount = $menuModel->prices * $prepareMenu->qty;
                             $prepareMenu->checkbill = "No";
                             $prepareMenu->save();
                         }
-                    } else {
-                        $prepareMenu = new PrepareMenu();
-                        $prepareMenu->table_id = $table_id;
-                        $prepareMenu->menu_id = $menuModel->id;
-                        $prepareMenu->qty = 1;
-                        $prepareMenu->price = $menuModel->prices;
-                        $prepareMenu->amount = $menuModel->prices * $prepareMenu->qty;
-                        $prepareMenu->checkbill = "No";
-                        $prepareMenu->save();
                     }
                 }
             }
@@ -227,34 +256,10 @@ class MenuController extends Controller
             $prepareMenu = \backend\models\PrepareMenu::find()
                 ->where(['checkbill' => 'No'])
                 ->all();
-            echo "
-                <table border='1' style='width:100% ;'>
-                <tr>
-                    <th class='text-center'>#</th>
-                    <th class='text-left'>ຊື່ເມນູ</th>
-                    <th class='text-center'>ຈໍານວນ</th>
-                    <th class='text-center'>ລາຄາ</th>
-                    <th class='text-center'>ລວມເປັນເງິນ</th>
-                    <th class='text-center'>ແອັກເຊິນ</th>
-                </tr>
-                ";
             $serie = 1;
             foreach ($prepareMenu as $prepareMenuD) {
-                // echo "<tr><td>". $serie++ ."</td><td>".$prepareMenuD->menu->name. "</td><td> " . $prepareMenuD->qty. "</td><td> ". $prepareMenuD->price. "</td><td>". $prepareMenuD->amount. "</td><td><a href='index.php?r=menu/delete-prepare-menu&id=". $prepareMenuD->id . "' class='btn btn-outline-danger btn-sm'>ລົບ</a></td></tr>";
-                echo "
-                <tr>
-                    <td class='text-center'>" . $serie++ . "</td>
-                    <td>" . $prepareMenuD->menu->name . "</td>
-                    <td class='text-center'>" . $prepareMenuD->qty . "</td>
-                    <td class='text-right'>" . number_format($prepareMenuD->price, 2) . "</td>
-                    <td class='text-right'>" . number_format($prepareMenuD->amount, 2) . "</td>
-                    <td class='text-center'>
-                        <a href='index.php?r=menu/delete-prepare-menu&id=" . $prepareMenuD->id . "' class='btn btn-outline-light btn-sm'><i class='fa fa-trash text-danger'></i></a>
-                    </td>
-                </tr>
-                ";
+                echo "<tr><td class='text-center'>" . $serie++ . "</td><td>" . $prepareMenuD->menu->name . "</td><td class='text-center'>" . $prepareMenuD->qty . "</td><td class='text-right'>" . number_format($prepareMenuD->price, 2) . "</td><td class='text-right'>" . number_format($prepareMenuD->amount, 2) . "</td><td class='text-center'><a href='index.php?r=menu/delete-prepare-menu&id=" . $prepareMenuD->id . "' class='btn btn-outline-light btn-sm'><i class='fa fa-trash text-danger'></i></a></td></tr>";
             }
-            echo "</table>";
         } elseif ($id != null && !Yii::$app->session->get('table_id')) {
             echo Yii::$app->session->setFlash('error', '<i class="fa fa-exclamation-circle"> </i> ' . 'ເລືອກໂຕະກ່ອນ');
             return $this->redirect(['sale-product']);
@@ -316,7 +321,7 @@ class MenuController extends Controller
                     $prepareModel = \backend\models\PrepareMenu::find()
                         ->where(['table_id' => $table_id, 'checkbill' => 'Waiting'])
                         ->all();
-                        
+
 
                     $maxid = \backend\models\Sale::find()->select('max(id) as id')->one();
                     if ($maxid->id) {
@@ -324,7 +329,7 @@ class MenuController extends Controller
                     } else {
                         $bill_no = 1;
                     }
-                    
+
                     $time = date('H:i');
 
                     foreach ($prepareModel as $data) {
@@ -343,7 +348,7 @@ class MenuController extends Controller
                         $UpdatetStatusTables = \Yii::$app->db->createCommand("UPDATE tables SET status=0 WHERE id=$table_id")->queryAll();
                         $delPrepareModel = \backend\models\PrepareMenu::deleteAll(['table_id' => $table_id, 'checkbill' => 'Waiting']);
                     }
-                    
+
                     $modelSale = \backend\models\Sale::find()->where(['bill_no' => $bill_no])->one();
                     return $this->render('print_bill', [
                         'modelSale' => $modelSale,
@@ -356,6 +361,14 @@ class MenuController extends Controller
     public function actionDeletePrepareMenu($id)
     {
         if (!empty($id)) {
+            $prepareMenuModel = \backend\models\PrepareMenu::find()->where(['id' => $id])->one();
+            $menu_id = $prepareMenuModel->menu_id;
+            $menu_qty = $prepareMenuModel->qty;
+
+            $menuModel = \backend\models\Menu::find()->where(['id' => $menu_id])->one();
+            $menuModel->qty = $menuModel->qty + $menu_qty;
+            $menuModel->save();
+
             $delPrepareModel = \backend\models\PrepareMenu::deleteAll(['id' => $id]);
             return $this->redirect(['sale-product']);
         }

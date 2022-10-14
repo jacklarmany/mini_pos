@@ -140,67 +140,67 @@ $this->params['breadcrumbs'][] = $this->title;
                 </tr>
             </tbody>
         </table>
+        <hr>
+
+        <?php echo GridView::widget([
+            'dataProvider' => $dataProvider,
+            // 'filterModel' => $searchModel,
+            'tableOptions' => ['class' => 'shadow-sm bg-white table-bordered table-hover', 'style' => 'width:100%'],
+            'columns' => [
+                ['class' => 'yii\grid\SerialColumn'],
+
+                'bill_no',
+                'date',
+                [
+                    'attribute' => Yii::t('app', 'Table'),
+                    'attribute' => 'table_id',
+                    'filter' => \yii\helpers\ArrayHelper::map(Tables::find()->asArray()->all(), 'id', 'name'),
+                    'value' => function ($data) {
+                        return $data->table->name;
+                    }
+                ],
+                [
+                    'attribute' => Yii::t('app', 'Menu'),
+                    'attribute' => 'menu_id',
+                    'filter' => \yii\helpers\ArrayHelper::map(Menu::find()->asArray()->all(), 'id', 'name'),
+                    'value' => function ($data) {
+                        return $data->menu->name;
+                    }
+                ],
+                [
+                    'attribute' => Yii::t('app', 'Qty'),
+                    'attribute' => 'qty',
+                    'headerOptions' => ['style' => 'text-align:center'],
+                    'contentOptions' =>  ['style' => 'text-align:center'],
+                    'value' => function ($data) {
+                        return $data->qty;
+                    }
+                ],
+                [
+                    'attribute' => Yii::t('app', 'Price'),
+                    'attribute' => 'price',
+                    'headerOptions' => ['style' => 'text-align:center'],
+                    'contentOptions' =>  ['style' => 'text-align:right'],
+                    'value' => function ($data) {
+                        return number_format($data->price, 2);
+                    }
+                ],
+                [
+                    'attribute' => Yii::t('app', 'Amount'),
+                    'attribute' => 'amount',
+                    'headerOptions' => ['style' => 'text-align:center'],
+                    'contentOptions' =>  ['style' => 'text-align:right'],
+                    'value' => function ($data) {
+                        return number_format($data->amount, 2);
+                    }
+                ],
+                // [
+                //     'class' => ActionColumn::className(),
+                //     'urlCreator' => function ($action, \backend\models\Sale $model, $key, $index, $column) {
+                //         return Url::toRoute([$action, 'id' => $model->id]);
+                //     }
+                // ],
+            ],
+        ]); ?>
     </div>
-    <?php echo GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'tableOptions' => ['class' => 'shadow-sm bg-white table-bordered table-hover', 'style' => 'width:100%'],
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'bill_no',
-            'date',
-            [
-                'attribute' => Yii::t('app', 'Table'),
-                'attribute' => 'table_id',
-                'filter' => \yii\helpers\ArrayHelper::map(Tables::find()->asArray()->all(), 'id', 'name'),
-                'value' => function ($data) {
-                    return $data->table->name;
-                }
-            ],
-            [
-                'attribute' => Yii::t('app', 'Menu'),
-                'attribute' => 'menu_id',
-                'filter' => \yii\helpers\ArrayHelper::map(Menu::find()->asArray()->all(), 'id', 'name'),
-                'value' => function ($data) {
-                    return $data->menu->name;
-                }
-            ],
-            [
-                'attribute' => Yii::t('app', 'Qty'),
-                'attribute' => 'qty',
-                'headerOptions' => ['style' => 'text-align:center'],
-                'contentOptions' =>  ['style' => 'text-align:center'],
-                'value' => function ($data) {
-                    return $data->qty;
-                }
-            ],
-            [
-                'attribute' => Yii::t('app', 'Price'),
-                'attribute' => 'price',
-                'headerOptions' => ['style' => 'text-align:center'],
-                'contentOptions' =>  ['style' => 'text-align:right'],
-                'value' => function ($data) {
-                    return number_format($data->price, 2);
-                }
-            ],
-            [
-                'attribute' => Yii::t('app', 'Amount'),
-                'attribute' => 'amount',
-                'headerOptions' => ['style' => 'text-align:center'],
-                'contentOptions' =>  ['style' => 'text-align:right'],
-                'value' => function ($data) {
-                    return number_format($data->amount, 2);
-                }
-            ],
-            // [
-            //     'class' => ActionColumn::className(),
-            //     'urlCreator' => function ($action, \backend\models\Sale $model, $key, $index, $column) {
-            //         return Url::toRoute([$action, 'id' => $model->id]);
-            //     }
-            // ],
-        ],
-    ]); ?>
-
-
 </div>

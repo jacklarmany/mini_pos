@@ -47,7 +47,8 @@ $this->params['breadcrumbs'][] = $this->title;
         padding: 5px;
     }
 
-    #w4-error-0 {
+    #w4-error-0,
+    #w5-error-0 {
         z-index: 4000;
     }
 
@@ -397,14 +398,14 @@ $this->params['breadcrumbs'][] = $this->title;
                             <hr class="mt-1">
                             <div class="scroller-bill">
                                 <table style="width:100%;" class="result">
-                                    <tr>
+                                    <!-- <tr>
                                         <th class="text-center">#</th>
                                         <th class="text-left">ຊື່ເມນູ</th>
                                         <th class="text-center">ຈໍານວນ</th>
                                         <th class="text-center">ລາຄາ</th>
                                         <th class="text-center">ລວມເປັນເງິນ</th>
-                                        <th class="text-center">ແອັກເຊິນ</th>
-                                    </tr>
+                                        <th class="text-center"></th>
+                                    </tr> -->
                                     <?php
                                     $prepareMenu = \backend\models\PrepareMenu::find()
                                         ->where(['checkbill' => 'No'])
@@ -560,6 +561,7 @@ $(document).ready(function () {
 
     }); 
     $("#w4-error-0").fadeOut(6000);
+    $("#w5-error-0").fadeOut(6000);
 });
  
 JS;

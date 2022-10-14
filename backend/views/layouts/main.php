@@ -31,6 +31,9 @@ $(document).ready(function(){
     }); 
     $("#restaurant").click(function(){
         window.location="index.php?r=restaurant/";
+    });
+    $("#setting").click(function(){
+        window.location="index.php?r=site/setting";
     }); 
     $("#crefresh").click(function(){
         document.location.reload();
@@ -132,23 +135,23 @@ $this->title = Yii::t('app', 'Mini RT');
                 <div class="col-md-12 border shadow-sm">
                     <hr class="p-0 m-0">
                     <div class="btn-group rounded btn-block">
-                        <button title="<?= Yii::t('app', 'Info') ?>" id="tables" type="button" class="btn btn-sm btn-block text-left">
-                            <img width="26" src="<?= Yii::$app->request->baseUrl ?>/icons/info-25.png">
-                            <?= Yii::t('app', 'Tables') ?>
-                        </button>
-                    </div>
-                    <hr class="p-0 m-0">
-                    <div class="btn-group rounded btn-block">
                         <button title="<?= Yii::t('app', 'Info') ?>" id="users" type="button" class="btn btn-sm btn-block text-left">
-                            <img width="26" src="<?= Yii::$app->request->baseUrl ?>/icons/user-25.png">
+                            <img width="26" src="<?= Yii::$app->request->baseUrl ?>/icons/users-25.png">
                             <?= Yii::t('app', 'Users') ?>
                         </button>
                     </div>
                     <hr class="p-0 m-0">
                     <div class="btn-group rounded btn-block">
+                        <button title="<?= Yii::t('app', 'Info') ?>" id="tables" type="button" class="btn btn-sm btn-block text-left">
+                            <img width="26" src="<?= Yii::$app->request->baseUrl ?>/icons/table-25.png">
+                            <?= Yii::t('app', 'Tables') ?>
+                        </button>
+                    </div>
+                    <hr class="p-0 m-0">
+                    <div class="btn-group rounded btn-block">
                         <button title="<?= Yii::t('app', 'Info') ?>" id="restaurant" type="button" class="btn btn-sm btn-block text-left">
-                            <img width="26" src="<?= Yii::$app->request->baseUrl ?>/icons/info-25.png">
-                            <?= Yii::t('app', 'Restaurant info') ?>
+                            <img width="26" src="<?= Yii::$app->request->baseUrl ?>/icons/restaurant-25.png">
+                            <?= Yii::t('app', 'Restaurant') ?>
                         </button>
                     </div>
                     <hr class="p-0 m-0">
@@ -180,7 +183,7 @@ $this->title = Yii::t('app', 'Mini RT');
                     </button>
                 </div>
                 <div class="btn-group rounded m-0">
-                    <button type="button" class="btn btn-sm bg-light rounded-0" aria-haspopup="true" aria-expanded="false">
+                    <button type="button" id="setting" class="btn btn-sm bg-light rounded-0" aria-haspopup="true" aria-expanded="false">
                         <img src="<?= Yii::$app->request->baseUrl ?>/icons/setting-25.png" width="25">
                     </button>
                 </div>
