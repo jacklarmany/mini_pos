@@ -15,21 +15,16 @@ use yii\widgets\ActiveForm;
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'id') ?>
-
-    <?= $form->field($model, 'table_id') ?>
-
-    <?= $form->field($model, 'menu_id') ?>
-
-    <?= $form->field($model, 'qty') ?>
-
-    <?= $form->field($model, 'price') ?>
-
-    <?php // echo $form->field($model, 'amount') ?>
-
-    <?php // echo $form->field($model, 'date') ?>
-
-    <?php // echo $form->field($model, 'user_id') ?>
+    <?php
+    echo $form->field($model, 'bill_no')->widget(\kartik\select2\Select2::className(), [
+        'data' => \yii\helpers\ArrayHelper::map(\backend\models\Sale::find()->groupBy('bill_no')->all(), 'bill_no', 'bill_no'),
+        'options' => ['placeholder' => Yii::t('app', 'bill no ...')],
+        'theme' => \kartik\Select2\Select2::THEME_BOOTSTRAP,
+        'pluginOptions' => [
+            'allowClear' => true,
+        ],
+    ])->label(false);
+    ?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>

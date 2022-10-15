@@ -140,7 +140,7 @@ $this->title = Yii::t('app', 'Mini RT');
     </style>
 </head>
 
-<body class="h-100" style="background-color: #e9ecef !important;">
+<body class="h-100" style="background-color: #e9ecef !important;" id="show">
     <?php $this->beginBody() ?>
     <header>
 
@@ -249,7 +249,7 @@ $this->title = Yii::t('app', 'Mini RT');
                     </button>
                     <div class="dropdown-menu dropdown-menu-right border-0 shadow rounded" style="width: 176px;">
                         <a class="dropdown-item btn btn-sm" href="index.php?r=user/profile&id=<?= Yii::$app->user->id ?>">
-                            <img src="<?= Yii::$app->request->baseUrl ?>/icons/user-profile-25.png"> <?= Yii::$app->user->identity->username ? Yii::$app->user->identity->username : ""; ?>
+                            <img src="<?= Yii::$app->request->baseUrl ?>/icons/user-profile-25.png"> <?php if(Yii::$app->user->id){echo \Yii::$app->user->identity->username;}?>
                         </a>
                         <?=
                         Html::a('<img src="' . Yii::$app->request->baseUrl . '/icons/logout-25.png">' . Yii::t('app', 'Signout'), ['site/logout'], [

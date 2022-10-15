@@ -275,7 +275,7 @@ $this->params['breadcrumbs'][] = $this->title;
     }
 </style>
 
-<div class="all" id="show" style="border: 2px solid #999; margin-top:0; border-radius:0px;">
+<div class="all" style="border: 2px solid #999; margin-top:0; border-radius:0px;">
     <p class="text-right m-0 mb-2">
         <b id="refresh" title="<?= Yii::t('app', 'Refresh') ?>" class="text-right btn-outline-info border mb-1 mr-1 badge badge-default circle mr-0" style="cursor:pointer"><i class="fa fa-refresh"></i></b>
         <b id="ctogle" title="<?= Yii::t('app', 'Hid') ?>" class="text-right btn-outline-info border mb-1 mr-1 badge badge-default circle mr-0" style="cursor:pointer"><i class="fa fa-minus"></i></b>
