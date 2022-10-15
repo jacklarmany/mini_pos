@@ -15,7 +15,47 @@ $this->title = Yii::t('app', 'Sales');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="col-md-12 mx-auto">
-    <div class="rounded bg-white" style="border: 1px solid #ccc;">
+
+    <!-- /// customer /// -->
+    <!-- <div class="row m-0 p-0"> -->
+    <div class="col-sm-10 mx-auto mb-3">
+        <div class="p-4 bg-white shadow-sm rounded">
+            <div class="card-body p-2">
+                <h5 class="card-title m-0"><?=Yii::t('app','Bills')?></h5>
+                <hr class="m-1">
+                <input type="text" class="form-control">
+            </div>
+        </div>
+    </div>
+    <?php
+    $saleModel = \backend\models\Sale::find()->groupBy('bill_no')->limit('2')->all();
+    foreach ($saleModel as $saleModelD) {
+    ?>
+        <div class="col-sm-6 mx-auto p-2">
+            <div class="p-3 bg-white shadow-sm rounded">
+                <div class="card-body p-2 text-center">
+                    <h5 class="card-title m-0">Bill no : <?= $saleModelD->bill_no ?></h5>
+                    <hr class="m-1">
+                    <div class="row">
+                        <div class="col-md-6 m-0 p-0">
+                            <p class="card-text p-0 m-0">10-20-2022</p>
+                            <p class="card-text p-0 m-0">Table 5</p>
+                        </div>
+                        <div class="col-md-6 m-0 p-0 text-success">
+                            <h4 class="mt-2">2.000.000</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <?php
+    }
+    ?>
+    <!-- </div> -->
+
+
+    <!-- /// from yii /// -->
+    <!-- <div class="rounded bg-white" style="border: 1px solid #ccc;">
         <div class="card-header">
             <div class="row">
                 <div class="col-md-6 pl-2 m-0">
@@ -33,9 +73,9 @@ $this->params['breadcrumbs'][] = $this->title;
             </p>
 
             <?php //echo $this->render('_search', ['model' => $searchModel]); 
-            ?>
+            ?> -->
 
-            <?= GridView::widget([
+            <?php GridView::widget([
                 'dataProvider' => $dataProvider,
                 'filterModel' => $searchModel,
                 'tableOptions' => ['class' => 'shadow-sm bg-white table-bordered table-hover', 'style' => 'width:100%'],
@@ -116,6 +156,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
             ]); ?>
 
-        </div>
+        <!-- </div>
     </div>
-</div>
+</div> -->
