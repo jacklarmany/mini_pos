@@ -32,6 +32,24 @@ $(document).ready(function(){
     $("#restaurant").click(function(){
         window.location="index.php?r=restaurant/";
     });
+    $("#category").click(function(){
+        window.location="index.php?r=categories/";
+    });
+    $("#menu").click(function(){
+        window.location="index.php?r=menu/";
+    });
+    $("#purchase").click(function(){
+        window.location="index.php?r=purchase/";
+    });
+    
+    $("#benifit").click(function(){
+        window.location="index.php?r=sale/index&benifit=true";
+    });
+    
+    $("#bill").click(function(){
+        window.location="index.php?r=sale/";
+    });
+    
     $("#setting").click(function(){
         window.location="index.php?r=site/setting";
     }); 
@@ -163,17 +181,39 @@ $this->title = Yii::t('app', 'Mini RT');
                     </div>
                     <hr class="p-0 m-0">
                     <div class="btn-group rounded btn-block">
-                        <button title="<?= Yii::t('app', 'Info') ?>" id="info" type="button" class="btn btn-sm btn-block text-left">
-                            <img width="26" src="<?= Yii::$app->request->baseUrl ?>/icons/info-25.png">เเเเเเเเเเเเเดเด้ด้ด้ด้ด
+                        <button title="<?= Yii::t('app', 'Info') ?>" id="category" type="button" class="btn btn-sm btn-block text-left">
+                            <img width="26" src="<?= Yii::$app->request->baseUrl ?>/icons/category-25.png">
+                            <?= Yii::t('app', 'Categories') ?>
                         </button>
                     </div>
                     <hr class="p-0 m-0">
                     <div class="btn-group rounded btn-block">
-                        <button title="<?= Yii::t('app', 'Info') ?>" id="info" type="button" class="btn btn-sm btn-block text-left">
-                            <img width="26" src="<?= Yii::$app->request->baseUrl ?>/icons/info-25.png">เเเเเเเเเเเเเดเด้ด้ด้ด้ด
+                        <button title="<?= Yii::t('app', 'Info') ?>" id="menu" type="button" class="btn btn-sm btn-block text-left">
+                            <img width="26" src="<?= Yii::$app->request->baseUrl ?>/icons/menu-25.png">
+                            <?= Yii::t('app', 'Menus') ?>
                         </button>
                     </div>
                     <hr class="p-0 m-0">
+                    <div class="btn-group rounded btn-block">
+                        <button title="<?= Yii::t('app', 'Info') ?>" id="purchase" type="button" class="btn btn-sm btn-block text-left">
+                            <img width="26" src="<?= Yii::$app->request->baseUrl ?>/icons/purchase-25.png">
+                            <?= Yii::t('app', 'Purchases') ?>
+                        </button>
+                    </div>
+                    <hr class="p-0 m-0">
+                    <div class="btn-group rounded btn-block">
+                        <button title="<?= Yii::t('app', 'Info') ?>" id="bill" type="button" class="btn btn-sm btn-block text-left">
+                            <img width="26" src="<?= Yii::$app->request->baseUrl ?>/icons/bill-25.png">
+                            <?= Yii::t('app', 'Bills') ?>
+                        </button>
+                    </div>
+                    <hr class="p-0 m-0">
+                    <div class="btn-group rounded btn-block">
+                        <button title="<?= Yii::t('app', 'Info') ?>" id="benifit" type="button" class="btn btn-sm btn-block text-left">
+                            <img width="26" src="<?= Yii::$app->request->baseUrl ?>/icons/benefit-25.png">
+                            <?= Yii::t('app', 'Benifit') ?>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -207,12 +247,12 @@ $this->title = Yii::t('app', 'Mini RT');
                     <button type="button" class="btn btn-sm bg-light rounded-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <img src="<?= Yii::$app->request->baseUrl ?>/icons/user-25.png">
                     </button>
-                    <div class="dropdown-menu dropdown-menu-right border-0 shadow rounded">
-                        <a class="dropdown-item btn btn-sm shadow rounded m-2" href="index.php?r=user/profile&id=<?= Yii::$app->user->id ?>">
-                            <img src="<?= Yii::$app->request->baseUrl ?>/icons/edit-user-24.png"> <?= Yii::$app->user->identity->username ? Yii::$app->user->identity->username : ""; ?>
+                    <div class="dropdown-menu dropdown-menu-right border-0 shadow rounded" style="width: 176px;">
+                        <a class="dropdown-item btn btn-sm" href="index.php?r=user/profile&id=<?= Yii::$app->user->id ?>">
+                            <img src="<?= Yii::$app->request->baseUrl ?>/icons/user-profile-25.png"> <?= Yii::$app->user->identity->username ? Yii::$app->user->identity->username : ""; ?>
                         </a>
                         <?=
-                        Html::a('<img src="' . Yii::$app->request->baseUrl . '/icons/logout-24.png">' . Yii::t('app', 'Signout'), ['site/logout'], [
+                        Html::a('<img src="' . Yii::$app->request->baseUrl . '/icons/logout-25.png">' . Yii::t('app', 'Signout'), ['site/logout'], [
                             'class' => 'dropdown-item',
                             'data' => [
                                 'method' => 'post'
