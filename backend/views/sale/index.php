@@ -28,30 +28,64 @@ $this->params['breadcrumbs'][] = $this->title;
             </div>
         </div>
     </div>
-
     <?php
     $bill_no = $searchModel->bill_no;
-    $saleModel = \backend\models\Sale::find()->groupBy('bill_no')->limit('2')->all();
-    foreach ($saleModel as $saleModelD) {
+    if ($bill_no) {
+        $saleModel = \backend\models\Sale::find()->groupBy('bill_no')->where(['bill_no' => $bill_no])->all();
+        foreach ($saleModel as $saleModelD) {
     ?>
-        <div class="col-sm-6 mx-auto p-2">
-            <div class="p-3 bg-white shadow-sm rounded">
-                <div class="card-body p-2 text-center">
-                    <h5 class="card-title m-0">Bill no : <?= $saleModelD->bill_no ?></h5>
-                    <hr class="m-1">
-                    <div class="row">
-                        <div class="col-md-6 m-0 p-0">
-                            <p class="card-text p-0 m-0">10-20-2022</p>
-                            <p class="card-text p-0 m-0">Table 5</p>
-                        </div>
-                        <div class="col-md-6 m-0 p-0 text-success">
-                            <h4 class="mt-2"><?= $bill_no ?></h4>
+            <div class="col-sm-6 mx-auto p-2">
+                <div class="p-3 bg-white shadow-sm rounded">
+                    <div class="card-body p-2 text-center">
+                        <h5 class="card-title m-0">Bill no : <?= $saleModelD->bill_no ?></h5>
+                        <hr class="m-1">
+                        <div class="row">
+                            <div class="col-md-6 m-0 p-0">
+                                <p class="card-text p-0 m-0">10-20-2022</p>
+                                <p class="card-text p-0 m-0">Table 5</p>
+                            </div>
+                            <div class="col-md-6 m-0 p-0 text-success">
+                                <h4 class="mt-2">
+                                    <?php
+                                    $sumAmount = \backend\models\Sale::find()->where(['bill_no' => $bill_no])->sum('amount');
+                                    echo $sumAmount;
+                                    ?>
+                                </h4>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        <?php
+        }
+    } else {
+        $saleModel = \backend\models\Sale::find()->groupBy('bill_no')->limit('2')->all();
+        foreach ($saleModel as $saleModelD) {
+        ?>
+            <div class="col-sm-6 mx-auto p-2">
+                <div class="p-3 bg-white shadow-sm rounded">
+                    <div class="card-body p-2 text-center">
+                        <h5 class="card-title m-0">Bill no : <?= $saleModelD->bill_no ?></h5>
+                        <hr class="m-1">
+                        <div class="row">
+                            <div class="col-md-6 m-0 p-0">
+                                <p class="card-text p-0 m-0">10-20-2022</p>
+                                <p class="card-text p-0 m-0">Table 5</p>
+                            </div>
+                            <div class="col-md-6 m-0 p-0 text-success">
+                                <h4 class="mt-2">
+                                    <?php
+                                    $sumAmount = \backend\models\Sale::find()->where(['bill_no' => $saleModelD->bill_no])->sum('amount');
+                                    echo $sumAmount;
+                                    ?>
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
     <?php
+        }
     }
     ?>
     <!-- </div> -->
@@ -78,7 +112,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <?php //echo $this->render('_search', ['model' => $searchModel]); 
             ?> -->
 
-    <?php echo GridView::widget([
+    <?php GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'tableOptions' => ['class' => 'shadow-sm bg-white table-bordered table-hover', 'style' => 'width:100%'],
