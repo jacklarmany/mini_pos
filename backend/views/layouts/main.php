@@ -146,7 +146,7 @@ $this->title = Yii::t('app', 'Mini RT');
 
         <div class="sidebar">
             <a class="font-weight-bold" href="<?= Yii::$app->request->baseUrl ?>">
-                <img src="<?= Yii::$app->request->baseUrl ?>/icons/logo-48.png" width="30">
+                <img src="<?= Yii::$app->request->baseUrl ?>/icons/logo/logo1-96.png" width="60">
                 <?php
                 $restaurant = \backend\models\Restaurant::find()->where(['user_id' => \Yii::$app->user->id])->one();
                 if (is_object($restaurant)) {
