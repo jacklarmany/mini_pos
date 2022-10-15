@@ -386,7 +386,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         </td>
                         <td style="width: 40%; vertical-align:top; background-color:#fcfcfc" class="p-3 shadow rounded">
                             <a href="#" class="btn btn-sm btn-outline-primary" title="Check bill now" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-eye"></i></a>
-                            <a href="index.php?r=menu/set-waiting&waiting=true" class="btn btn-sm btn-warning" title="Check bill later"><i class="fa fa-shopping-cart"></i></a>
+                            <a href="index.php?r=menu/set-waiting&waiting=true" class="btn btn-sm btn-warning" title="Check bill later"><i class="fa fa-shopping-cart"></i><?=Yii::t('app','Confirm order')?></a>
                             <?php
                             if (Yii::$app->session->get('table_id')) {
                                 $tablename = \backend\models\Tables::find()->where(['id' => Yii::$app->session->get('table_id')])->one();
@@ -502,7 +502,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 <?php
                                     }
                                 } else {
-                                    echo Yii::t('app', 'More ordering...');
+                                    echo "<span class='text-danger'>".Yii::t('app', 'More ordering...') ."</span>";
                                 }
                                 ?>
                                 <tr>
